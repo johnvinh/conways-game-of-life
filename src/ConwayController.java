@@ -104,7 +104,9 @@ public class ConwayController {
 
         @Override
         public void run() {
+            boolean moreTicksNeeded = false;
             while (!Thread.currentThread().isInterrupted()) {
+                moreTicksNeeded = false;
                 JButton[][] cells = view.getCells();
                 int dim = model.getDim();
                 // One tick of time
@@ -115,13 +117,16 @@ public class ConwayController {
                             // Underpopulation
                             if (numAliveNeighbours < 2) {
                                 toggleCell(cells[i][j]);
+                                moreTicksNeeded = true;
                             } else if (numAliveNeighbours > 3) {
                                 toggleCell(cells[i][j]);
+                                moreTicksNeeded = true;
                             }
                         } else {
                             // Reproduction
                             if (numAliveNeighbours == 3) {
                                 toggleCell(cells[i][j]);
+                                moreTicksNeeded = true;
                             }
                         }
                     }
@@ -136,6 +141,11 @@ public class ConwayController {
 
                 int currentTicks = Integer.parseInt(view.getTicks().getText());
                 view.getTicks().setText(String.valueOf(currentTicks + 1));
+                if (!moreTicksNeeded) {
+                    thread.interrupt();
+                    JOptionPane.showConfirmDialog(view, "Simulation completed in " + currentTicks + " ticks!",
+                            "Simulation Completed!", JOptionPane.DEFAULT_OPTION);
+                }
             }
         }
     }
