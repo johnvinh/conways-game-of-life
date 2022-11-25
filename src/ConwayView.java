@@ -64,6 +64,10 @@ public class ConwayView extends JFrame {
         return cells;
     }
 
+    public void setCells(JButton[][] cells) {
+        this.cells = cells;
+    }
+
     public JButton getSetDimensionsButton() {
         return setDimensionsButton;
     }

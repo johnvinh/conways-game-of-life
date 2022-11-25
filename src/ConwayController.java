@@ -47,6 +47,7 @@ public class ConwayController {
             view.getCellLayout().setColumns(newDimensions);
             JPanel panel = view.getCellPanel();
             panel.removeAll();
+            view.setCells(new JButton[newDimensions][newDimensions]);
             model.setDim(newDimensions);
             view.initializeCells(newDimensions);
             initializeCellControls(view.getCells());
