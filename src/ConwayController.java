@@ -97,6 +97,7 @@ public class ConwayController {
             System.out.println("aaaa");
             thread = new Thread(new GameRun());
             thread.start();
+            ((JButton) e.getSource()).setEnabled(false);
         }
     }
 
@@ -145,6 +146,7 @@ public class ConwayController {
                     thread.interrupt();
                     JOptionPane.showConfirmDialog(view, "Simulation completed in " + currentTicks + " ticks!",
                             "Simulation Completed!", JOptionPane.DEFAULT_OPTION);
+                    view.getStartButton().setEnabled(true);
                 }
             }
         }
