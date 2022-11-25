@@ -7,6 +7,8 @@ public class ConwayView extends JFrame {
     private final JPanel cellPanel;
     private final JPanel optionsPanel;
     private final JButton startButton;
+    private final JTextField dimSelection;
+    private final JButton setDimensionsButton;
 
     public ConwayView(int dim) {
         super("Conway's Game of Life");
@@ -26,6 +28,12 @@ public class ConwayView extends JFrame {
         optionsPanel = new JPanel();
         startButton = new JButton("Start");
         optionsPanel.add(startButton);
+        dimSelection = new JTextField(4);
+        JLabel dimLabel = new JLabel("Dimensions");
+        setDimensionsButton = new JButton("Set");
+        optionsPanel.add(dimLabel);
+        optionsPanel.add(dimSelection);
+        optionsPanel.add(setDimensionsButton);
 
         BorderLayout mainLayout = new BorderLayout();
         setLayout(mainLayout);
