@@ -6,6 +6,7 @@ public class ConwayView extends JFrame {
     private int dim;
     private final JPanel cellPanel;
     private final JPanel optionsPanel;
+    private final JButton startButton;
 
     public ConwayView(int dim) {
         super("Conway's Game of Life");
@@ -23,7 +24,7 @@ public class ConwayView extends JFrame {
 
         // Options/Buttons
         optionsPanel = new JPanel();
-        JButton startButton = new JButton("Start");
+        startButton = new JButton("Start");
         optionsPanel.add(startButton);
 
         BorderLayout mainLayout = new BorderLayout();
