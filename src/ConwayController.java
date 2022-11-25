@@ -81,7 +81,7 @@ public class ConwayController {
             } catch (IndexOutOfBoundsException e) {
                 continue;
             }
-            
+
             if (isAlive(cell)) {
                 numNeighbours++;
             }
@@ -104,37 +104,39 @@ public class ConwayController {
 
         @Override
         public void run() {
-            JButton[][] cells = view.getCells();
-            int dim = model.getDim();
-            // One tick of time
-            for (int i = 0; i < dim; i++) {
-                for (int j = 0; j < dim; j++) {
-                    int numAliveNeighbours = getNumAliveNeighbours(cells, i, j);
-                    if (isAlive(cells[i][j])) {
-                        // Underpopulation
-                        if (numAliveNeighbours < 2) {
-                            toggleCell(cells[i][j]);
-                        } else if (numAliveNeighbours > 3) {
-                            toggleCell(cells[i][j]);
-                        }
-                    } else {
-                        // Reproduction
-                        if (numAliveNeighbours == 3) {
-                            toggleCell(cells[i][j]);
+            while (!Thread.currentThread().isInterrupted()) {
+                JButton[][] cells = view.getCells();
+                int dim = model.getDim();
+                // One tick of time
+                for (int i = 0; i < dim; i++) {
+                    for (int j = 0; j < dim; j++) {
+                        int numAliveNeighbours = getNumAliveNeighbours(cells, i, j);
+                        if (isAlive(cells[i][j])) {
+                            // Underpopulation
+                            if (numAliveNeighbours < 2) {
+                                toggleCell(cells[i][j]);
+                            } else if (numAliveNeighbours > 3) {
+                                toggleCell(cells[i][j]);
+                            }
+                        } else {
+                            // Reproduction
+                            if (numAliveNeighbours == 3) {
+                                toggleCell(cells[i][j]);
+                            }
                         }
                     }
                 }
-            }
 
-            // A tick is one second
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+                // A tick is one second
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
-            int currentTicks = Integer.parseInt(view.getTicks().getText());
-            view.getTicks().setText(String.valueOf(currentTicks + 1));
+                int currentTicks = Integer.parseInt(view.getTicks().getText());
+                view.getTicks().setText(String.valueOf(currentTicks + 1));
+            }
         }
     }
 }
