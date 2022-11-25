@@ -13,6 +13,8 @@ public class ConwayView extends JFrame {
         setSize(800, 600);
         setVisible(true);
         initializeCells();
+        GridLayout layout = new GridLayout(dim, dim);
+        setLayout(layout);
     }
 
     private void initializeCells() {
