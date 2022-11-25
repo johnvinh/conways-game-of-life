@@ -60,6 +60,13 @@ public class ConwayController {
         return cell.getBackground() == Color.WHITE;
     }
 
+    private void toggleCell(JButton cell) {
+        if (cell.getBackground() == Color.WHITE) {
+            cell.setBackground(Color.BLACK);
+        } else {
+            cell.setBackground(Color.WHITE);
+        }
+    }
     private int getNumAliveNeighbours(JButton[][] cells, int row, int col) {
         // There are 8 possible adjacent neighbors
         int numNeighbours = 0;
