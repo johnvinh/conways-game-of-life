@@ -60,9 +60,44 @@ public class ConwayController {
         return cell.getBackground() == Color.WHITE;
     }
 
-    private void getNumAliveNeighbours(JButton[][] cells, int row, int col) {
+    private int getNumAliveNeighbours(JButton[][] cells, int row, int col) {
         // There are 8 possible adjacent neighbors
+        int numNeighbours = 0;
 
+        // 1. same row, 1 column ahead
+        if (isAlive(cells[row][col + 1])) {
+            numNeighbours++;
+        }
+        // 2. same row, 1 column behind
+        if (isAlive(cells[row][col - 1])) {
+            numNeighbours++;
+        }
+        // 3. same column, 1 row behind
+        if (isAlive(cells[row - 1][col])) {
+            numNeighbours++;
+        }
+        // 4. same column, 1 row ahead
+        if (isAlive(cells[row + 1][col])) {
+            numNeighbours++;
+        }
+        // 5. previous row, 1 column behind
+        if (isAlive(cells[row - 1][col - 1])) {
+            numNeighbours++;
+        }
+        // 6. previous row, 1 column ahead
+        if (isAlive(cells[row - 1][col + 1])) {
+            numNeighbours++;
+        }
+        // 7. next row, 1 column behind
+        if (isAlive(cells[row + 1][col - 1])) {
+            numNeighbours++;
+        }
+        // 8. next row, 1 column ahead
+        if (isAlive(cells[row + 1][col + 1])) {
+            numNeighbours++;
+        }
+
+        return numNeighbours;
     }
 
     private class StartButtonClick implements ActionListener {
