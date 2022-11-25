@@ -44,4 +44,8 @@ public class ConwayView extends JFrame {
             }
         }
     }
+
+    public JButton[][] getCells() {
+        return cells;
+    }
 }
