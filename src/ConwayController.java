@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class ConwayController {
     ConwayModel model;
     ConwayView view;
+    Thread thread;
 
     public ConwayController(ConwayModel model, ConwayView view) {
         this.model = model;
@@ -13,6 +14,7 @@ public class ConwayController {
         JButton[][] cells = view.getCells();
         initializeCellControls(cells);
         view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
+        view.getStartButton().addActionListener(new StartButtonClick());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -57,7 +59,7 @@ public class ConwayController {
     }
 
     private boolean isAlive(JButton cell) {
-        return cell.getBackground() == Color.WHITE;
+        return cell.getBackground() == Color.BLACK;
     }
 
     private void toggleCell(JButton cell) {
@@ -73,7 +75,13 @@ public class ConwayController {
         int[][] rowsCols = {{row, col+1}, {row, col-1}, {row-1, col}, {row+1, col}, {row-1, col-1}, {row-1, col+1},
                 {row+1, col-1}, {row+1, col+1}};
         for (int i = 0; i < 8; i++) {
-            JButton cell = cells[rowsCols[i][0]][rowsCols[i][1]];
+            JButton cell;
+            try {
+                cell = cells[rowsCols[i][0]][rowsCols[i][1]];
+            } catch (IndexOutOfBoundsException e) {
+                continue;
+            }
+            
             if (isAlive(cell)) {
                 numNeighbours++;
             }
@@ -86,7 +94,9 @@ public class ConwayController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            System.out.println("aaaa");
+            thread = new Thread(new GameRun());
+            thread.start();
         }
     }
 
