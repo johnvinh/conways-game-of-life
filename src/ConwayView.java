@@ -4,7 +4,8 @@ import java.awt.*;
 public class ConwayView extends JFrame {
     JButton[][] cells;
     private int dim;
-    private JPanel panel;
+    private JPanel cellPanel;
+    private final JPanel optionsPanel;
 
     public ConwayView(int dim) {
         super("Conway's Game of Life");
@@ -13,12 +14,23 @@ public class ConwayView extends JFrame {
         this.dim = dim;
         setSize(800, 600);
 
-        panel = new JPanel();
+        // Cell Panel
+        cellPanel = new JPanel();
         GridLayout layout = new GridLayout(dim, dim);
-        panel.setLayout(layout);
-        panel.setVisible(true);
+        cellPanel.setLayout(layout);
+        cellPanel.setVisible(true);
         initializeCells();
-        add(panel);
+
+        // Options/Buttons
+        optionsPanel = new JPanel();
+        JButton startButton = new JButton("Start");
+        optionsPanel.add(startButton);
+
+        BorderLayout mainLayout = new BorderLayout();
+        setLayout(mainLayout);
+        add(cellPanel, BorderLayout.CENTER);
+        add(optionsPanel, BorderLayout.PAGE_END);
+
         setVisible(true);
     }
 
@@ -28,7 +40,7 @@ public class ConwayView extends JFrame {
                 cells[i][j] = new JButton("");
                 cells[i][j].setBackground(Color.WHITE);
                 cells[i][j].setVisible(true);
-                panel.add(cells[i][j]);
+                cellPanel.add(cells[i][j]);
             }
         }
     }
