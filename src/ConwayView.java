@@ -7,5 +7,7 @@ public class ConwayView extends JFrame {
         super("Conway's Game of Life");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.cells = new JButton[dim][dim];
+        setSize(800, 600);
+        setVisible(true);
     }
 }
