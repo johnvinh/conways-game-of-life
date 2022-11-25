@@ -2,9 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConwayView extends JFrame {
-    JButton[][] cells;
+    private JButton[][] cells;
     private int dim;
-    private JPanel cellPanel;
+    private final JPanel cellPanel;
     private final JPanel optionsPanel;
 
     public ConwayView(int dim) {
