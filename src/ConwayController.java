@@ -55,4 +55,29 @@ public class ConwayController {
             panel.repaint();
         }
     }
+
+    private boolean isAlive(JButton cell) {
+        return cell.getBackground() == Color.WHITE;
+    }
+
+    private void getNumAliveNeighbours(JButton[][] cells, int row, int col) {
+        // There are 8 possible adjacent neighbors
+
+    }
+
+    private class StartButtonClick implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private class GameRun implements Runnable {
+
+        @Override
+        public void run() {
+            JButton[][] cells = view.getCells();
+        }
+    }
 }
