@@ -83,4 +83,8 @@ public class ConwayView extends JFrame {
     public GridLayout getCellLayout() {
         return cellLayout;
     }
+
+    public JLabel getTicks() {
+        return ticks;
+    }
 }
