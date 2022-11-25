@@ -87,4 +87,8 @@ public class ConwayView extends JFrame {
     public JLabel getTicks() {
         return ticks;
     }
+
+    public JButton getStartButton() {
+        return startButton;
+    }
 }
