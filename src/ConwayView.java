@@ -9,6 +9,7 @@ public class ConwayView extends JFrame {
     private final JTextField dimSelection;
     private final JButton setDimensionsButton;
     private final JLabel ticks;
+    private final GridLayout cellLayout;
 
     public ConwayView(ConwayModel model) {
         super("Conway's Game of Life");
@@ -19,8 +20,8 @@ public class ConwayView extends JFrame {
 
         // Cell Panel
         cellPanel = new JPanel();
-        GridLayout layout = new GridLayout(dim, dim);
-        cellPanel.setLayout(layout);
+        cellLayout = new GridLayout(dim, dim);
+        cellPanel.setLayout(cellLayout);
         cellPanel.setVisible(true);
         initializeCells(dim);
 
@@ -48,7 +49,7 @@ public class ConwayView extends JFrame {
         setVisible(true);
     }
 
-    private void initializeCells(int dim) {
+    public void initializeCells(int dim) {
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 cells[i][j] = new JButton("");
@@ -65,5 +66,17 @@ public class ConwayView extends JFrame {
 
     public JButton getSetDimensionsButton() {
         return setDimensionsButton;
+    }
+
+    public JTextField getDimSelection() {
+        return dimSelection;
+    }
+
+    public JPanel getCellPanel() {
+        return cellPanel;
+    }
+
+    public GridLayout getCellLayout() {
+        return cellLayout;
     }
 }

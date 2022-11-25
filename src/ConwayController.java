@@ -12,6 +12,7 @@ public class ConwayController {
         this.view = view;
         JButton[][] cells = view.getCells();
         initializeCellControls(cells);
+        view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -33,6 +34,24 @@ public class ConwayController {
             } else {
                 target.setBackground(Color.WHITE);
             }
+        }
+    }
+
+    private class SetDimensionsClick implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int newDimensions = Integer.parseInt(view.getDimSelection().getText());
+
+            view.getCellLayout().setRows(newDimensions);
+            view.getCellLayout().setColumns(newDimensions);
+            JPanel panel = view.getCellPanel();
+            panel.removeAll();
+            model.setDim(newDimensions);
+            view.initializeCells(newDimensions);
+            initializeCellControls(view.getCells());
+            panel.revalidate();
+            panel.repaint();
         }
     }
 }

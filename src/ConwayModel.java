@@ -8,4 +8,8 @@ public class ConwayModel {
     public int getDim() {
         return dim;
     }
+
+    public void setDim(int dim) {
+        this.dim = dim;
+    }
 }
