@@ -32,7 +32,7 @@ public class ConwayView extends JFrame {
         dimSelection = new JTextField(4);
         JLabel dimLabel = new JLabel("Dimensions");
         setDimensionsButton = new JButton("Set");
-        
+
         optionsPanel.add(ticksLabel);
         optionsPanel.add(ticks);
         optionsPanel.add(startButton);
@@ -61,5 +61,9 @@ public class ConwayView extends JFrame {
 
     public JButton[][] getCells() {
         return cells;
+    }
+
+    public JButton getSetDimensionsButton() {
+        return setDimensionsButton;
     }
 }
