@@ -98,6 +98,7 @@ public class ConwayController {
             thread = new Thread(new GameRun());
             thread.start();
             ((JButton) e.getSource()).setEnabled(false);
+            view.getTicks().setText("0");
         }
     }
 
@@ -105,8 +106,9 @@ public class ConwayController {
 
         @Override
         public void run() {
-            boolean moreTicksNeeded = false;
-            while (!Thread.currentThread().isInterrupted()) {
+            System.out.println("Started");
+            boolean moreTicksNeeded;
+            while (!thread.isInterrupted()) {
                 moreTicksNeeded = false;
                 JButton[][] cells = view.getCells();
                 int dim = model.getDim();
@@ -141,13 +143,15 @@ public class ConwayController {
                 }
 
                 int currentTicks = Integer.parseInt(view.getTicks().getText());
-                view.getTicks().setText(String.valueOf(currentTicks + 1));
                 if (!moreTicksNeeded) {
-                    thread.interrupt();
-                    JOptionPane.showConfirmDialog(view, "Simulation completed in " + currentTicks + " ticks!",
-                            "Simulation Completed!", JOptionPane.DEFAULT_OPTION);
+                    JOptionPane.showConfirmDialog(null,
+                            "Simulation complete in " + currentTicks + " ticks!",
+                            "Simulation Complete", JOptionPane.DEFAULT_OPTION);
                     view.getStartButton().setEnabled(true);
+                    thread.interrupt();
+                    return;
                 }
+                view.getTicks().setText(String.valueOf(currentTicks + 1));
             }
         }
     }
