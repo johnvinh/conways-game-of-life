@@ -16,6 +16,7 @@ public class ConwayController {
         initializeCellControls(cells);
         view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
         view.getStartButton().addActionListener(new StartButtonClick());
+        view.getStopButton().addActionListener(new StopButtonClick());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -106,11 +107,20 @@ public class ConwayController {
         }
     }
 
+    private class StopButtonClick implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gameRunning = false;
+            thread.interrupt();
+        }
+    }
+
     private class GameRun implements Runnable {
 
         @Override
         public void run() {
-            System.out.println("Started");
+            view.getStopButton().setEnabled(true);
             boolean moreTicksNeeded;
             gameRunning = true;
             while (!thread.isInterrupted()) {
@@ -140,20 +150,28 @@ public class ConwayController {
                     }
                 }
 
+                int currentTicks = Integer.parseInt(view.getTicks().getText());
                 // A tick is one second
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    JOptionPane.showConfirmDialog(null,
+                            "Simulation complete in " + currentTicks + " ticks!",
+                            "Simulation Complete", JOptionPane.DEFAULT_OPTION);
+                    view.getStartButton().setEnabled(true);
+                    view.getSetDimensionsButton().setEnabled(true);
+                    view.getStopButton().setEnabled(false);
+                    gameRunning = false;
+                    return;
                 }
 
-                int currentTicks = Integer.parseInt(view.getTicks().getText());
                 if (!moreTicksNeeded) {
                     JOptionPane.showConfirmDialog(null,
                             "Simulation complete in " + currentTicks + " ticks!",
                             "Simulation Complete", JOptionPane.DEFAULT_OPTION);
                     view.getStartButton().setEnabled(true);
                     view.getSetDimensionsButton().setEnabled(true);
+                    view.getStopButton().setEnabled(false);
                     gameRunning = false;
                     thread.interrupt();
                     return;

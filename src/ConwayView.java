@@ -6,6 +6,7 @@ public class ConwayView extends JFrame {
     private final JPanel cellPanel;
     private final JPanel optionsPanel;
     private final JButton startButton;
+    private final JButton stopButton;
     private final JTextField dimSelection;
     private final JButton setDimensionsButton;
     private final JLabel ticks;
@@ -30,6 +31,7 @@ public class ConwayView extends JFrame {
         ticks = new JLabel("0");
         optionsPanel = new JPanel();
         startButton = new JButton("Start");
+        stopButton = new JButton("Stop");
         dimSelection = new JTextField(4);
         JLabel dimLabel = new JLabel("Dimensions");
         setDimensionsButton = new JButton("Set");
@@ -37,6 +39,8 @@ public class ConwayView extends JFrame {
         optionsPanel.add(ticksLabel);
         optionsPanel.add(ticks);
         optionsPanel.add(startButton);
+        optionsPanel.add(stopButton);
+        stopButton.setEnabled(false);
         optionsPanel.add(dimLabel);
         optionsPanel.add(dimSelection);
         optionsPanel.add(setDimensionsButton);
@@ -90,5 +94,9 @@ public class ConwayView extends JFrame {
 
     public JButton getStartButton() {
         return startButton;
+    }
+
+    public JButton getStopButton() {
+        return stopButton;
     }
 }
