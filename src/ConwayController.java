@@ -101,6 +101,7 @@ public class ConwayController {
             thread = new Thread(new GameRun());
             thread.start();
             ((JButton) e.getSource()).setEnabled(false);
+            view.getSetDimensionsButton().setEnabled(false);
             view.getTicks().setText("0");
         }
     }
@@ -152,6 +153,7 @@ public class ConwayController {
                             "Simulation complete in " + currentTicks + " ticks!",
                             "Simulation Complete", JOptionPane.DEFAULT_OPTION);
                     view.getStartButton().setEnabled(true);
+                    view.getSetDimensionsButton().setEnabled(true);
                     gameRunning = false;
                     thread.interrupt();
                     return;
