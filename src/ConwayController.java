@@ -7,6 +7,7 @@ public class ConwayController {
     ConwayModel model;
     ConwayView view;
     Thread thread;
+    private boolean gameRunning = false;
 
     public ConwayController(ConwayModel model, ConwayView view) {
         this.model = model;
@@ -15,6 +16,7 @@ public class ConwayController {
         initializeCellControls(cells);
         view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
         view.getStartButton().addActionListener(new StartButtonClick());
+        thread = new Thread(new GameRun());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -30,6 +32,9 @@ public class ConwayController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (gameRunning) {
+                return;
+            }
             JButton target = (JButton) e.getSource();
             if (target.getBackground() == Color.WHITE) {
                 target.setBackground(Color.BLACK);
@@ -95,7 +100,6 @@ public class ConwayController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("aaaa");
-            thread = new Thread(new GameRun());
             thread.start();
             ((JButton) e.getSource()).setEnabled(false);
             view.getTicks().setText("0");
@@ -108,6 +112,7 @@ public class ConwayController {
         public void run() {
             System.out.println("Started");
             boolean moreTicksNeeded;
+            gameRunning = true;
             while (!thread.isInterrupted()) {
                 moreTicksNeeded = false;
                 JButton[][] cells = view.getCells();
@@ -148,6 +153,7 @@ public class ConwayController {
                             "Simulation complete in " + currentTicks + " ticks!",
                             "Simulation Complete", JOptionPane.DEFAULT_OPTION);
                     view.getStartButton().setEnabled(true);
+                    gameRunning = false;
                     thread.interrupt();
                     return;
                 }
