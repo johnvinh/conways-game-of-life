@@ -109,4 +109,8 @@ public class ConwayView extends JFrame {
     public JButton getSpeedUpButton() {
         return speedUpButton;
     }
+
+    public JButton getSlowDownButton() {
+        return slowDownButton;
+    }
 }
