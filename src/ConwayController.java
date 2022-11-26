@@ -3,14 +3,43 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @author John
+ * @version 1
+ * The MVC architecture controller for Conway's Game of Life.
+ */
 public class ConwayController {
+    /**
+     * The MVC architecture model of the simulation.
+     */
     ConwayModel model;
+    /**
+     * The MVC architecture view of the simulation.
+     */
     ConwayView view;
+    /**
+     * Runs the simulation when the start button is clicked.
+     */
     Thread thread;
+    /**
+     * Indicates whether the simulation is running or not.
+     */
     private boolean gameRunning = false;
+    /**
+     * The thread sleeps for this amount of time.
+     */
     private int threadSleep = 1000;
+    /**
+     * When the slow-down or speed-up buttons are clicked,
+     * the thread sleep time is changed by this amount.
+     */
     private final int THREAD_SLEEP_INTERVAL = 300;
 
+    /**
+     * Class constructor.
+     * @param model the MVC architecture model of the simulation
+     * @param view  the MVC architecture view of the simulation
+     */
     public ConwayController(ConwayModel model, ConwayView view) {
         this.model = model;
         this.view = view;
@@ -23,6 +52,10 @@ public class ConwayController {
         view.getSlowDownButton().addActionListener(new SlowDownButtonClick());
     }
 
+    /**
+     * Initializes the action listeners for each cell.
+     * @param cells a 2d-array containing the JButton for each cell
+     */
     public void initializeCellControls(JButton[][] cells) {
         int dim = model.getDim();
         for (int i = 0; i < dim; i++) {
@@ -32,6 +65,9 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Toggles the alive status of a cell when it is clicked.
+     */
     private class CellButtonClick implements ActionListener {
 
         @Override
@@ -48,6 +84,10 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Set the dimensions of the game and
+     * re-draw the board when clicked.
+     */
     private class SetDimensionsClick implements ActionListener {
 
         @Override
@@ -67,10 +107,19 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Returns whether a given cell is alive or not.
+     * @param cell  a button representing a cell
+     * @return  true if the cell is alive, false otherwise
+     */
     private boolean isAlive(JButton cell) {
         return cell.getBackground() == Color.BLACK;
     }
 
+    /**
+     * Toggle the alive status of a cell.
+     * @param cell  a button representing a cell
+     */
     private void toggleCell(JButton cell) {
         if (cell.getBackground() == Color.WHITE) {
             cell.setBackground(Color.BLACK);
@@ -78,6 +127,14 @@ public class ConwayController {
             cell.setBackground(Color.WHITE);
         }
     }
+
+    /**
+     * Gets the number of alive neighbours this cell has.
+     * @param cells a 2d-array containing buttons which represent cells
+     * @param row   the row of the cell to check
+     * @param col   the column of the cell to check
+     * @return  a number representing the number of alive neighbours of the cell
+     */
     private int getNumAliveNeighbours(JButton[][] cells, int row, int col) {
         // There are 8 possible adjacent neighbors
         int numNeighbours = 0;
@@ -99,6 +156,9 @@ public class ConwayController {
         return numNeighbours;
     }
 
+    /**
+     * Starts the simulation when clicked.
+     */
     private class StartButtonClick implements ActionListener {
 
         @Override
@@ -111,6 +171,9 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Stops the simulation when clicked.
+     */
     private class StopButtonClick implements ActionListener {
 
         @Override
@@ -120,6 +183,9 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Speeds up the simulation when clicked.
+     */
     private class SpeedUpButtonClick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -129,6 +195,9 @@ public class ConwayController {
         }
     }
 
+    /**
+     * Slows down the simulation when clicked.
+     */
     private class SlowDownButtonClick implements ActionListener {
 
         @Override
@@ -137,6 +206,9 @@ public class ConwayController {
         }
     }
 
+    /**
+     * The actions to take when the simulation is running.
+     */
     private class GameRun implements Runnable {
 
         @Override
