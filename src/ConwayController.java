@@ -19,6 +19,7 @@ public class ConwayController {
         view.getStartButton().addActionListener(new StartButtonClick());
         view.getStopButton().addActionListener(new StopButtonClick());
         view.getSpeedUpButton().addActionListener(new SpeedUpButtonClick());
+        view.getSlowDownButton().addActionListener(new SlowDownButtonClick());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -124,6 +125,14 @@ public class ConwayController {
             if (threadSleep >= 50) {
                 threadSleep -= 50;
             }
+        }
+    }
+
+    private class SlowDownButtonClick implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            threadSleep += 50;
         }
     }
 
