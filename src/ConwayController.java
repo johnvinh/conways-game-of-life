@@ -16,7 +16,6 @@ public class ConwayController {
         initializeCellControls(cells);
         view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
         view.getStartButton().addActionListener(new StartButtonClick());
-        thread = new Thread(new GameRun());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -99,7 +98,7 @@ public class ConwayController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("aaaa");
+            thread = new Thread(new GameRun());
             thread.start();
             ((JButton) e.getSource()).setEnabled(false);
             view.getTicks().setText("0");
