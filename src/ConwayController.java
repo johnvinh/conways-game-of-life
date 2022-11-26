@@ -9,6 +9,7 @@ public class ConwayController {
     Thread thread;
     private boolean gameRunning = false;
     private int threadSleep = 1000;
+    private final int THREAD_SLEEP_INTERVAL = 300;
 
     public ConwayController(ConwayModel model, ConwayView view) {
         this.model = model;
@@ -122,8 +123,8 @@ public class ConwayController {
     private class SpeedUpButtonClick implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (threadSleep >= 50) {
-                threadSleep -= 50;
+            if (threadSleep >= THREAD_SLEEP_INTERVAL) {
+                threadSleep -= THREAD_SLEEP_INTERVAL;
             }
         }
     }
@@ -132,7 +133,7 @@ public class ConwayController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            threadSleep += 50;
+            threadSleep += THREAD_SLEEP_INTERVAL;
         }
     }
 
