@@ -8,6 +8,7 @@ public class ConwayController {
     ConwayView view;
     Thread thread;
     private boolean gameRunning = false;
+    private int threadSleep = 1000;
 
     public ConwayController(ConwayModel model, ConwayView view) {
         this.model = model;
@@ -153,7 +154,7 @@ public class ConwayController {
                 int currentTicks = Integer.parseInt(view.getTicks().getText());
                 // A tick is one second
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(threadSleep);
                 } catch (InterruptedException e) {
                     JOptionPane.showConfirmDialog(null,
                             "Simulation complete in " + currentTicks + " ticks!",
