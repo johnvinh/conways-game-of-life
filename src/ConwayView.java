@@ -105,4 +105,8 @@ public class ConwayView extends JFrame {
     public JButton getStopButton() {
         return stopButton;
     }
+
+    public JButton getSpeedUpButton() {
+        return speedUpButton;
+    }
 }

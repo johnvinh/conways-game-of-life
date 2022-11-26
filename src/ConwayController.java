@@ -18,6 +18,7 @@ public class ConwayController {
         view.getSetDimensionsButton().addActionListener(new SetDimensionsClick());
         view.getStartButton().addActionListener(new StartButtonClick());
         view.getStopButton().addActionListener(new StopButtonClick());
+        view.getSpeedUpButton().addActionListener(new SpeedUpButtonClick());
     }
 
     public void initializeCellControls(JButton[][] cells) {
@@ -114,6 +115,15 @@ public class ConwayController {
         public void actionPerformed(ActionEvent e) {
             gameRunning = false;
             thread.interrupt();
+        }
+    }
+
+    private class SpeedUpButtonClick implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (threadSleep >= 50) {
+                threadSleep -= 50;
+            }
         }
     }
 
