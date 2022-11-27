@@ -176,6 +176,7 @@ public class ConwayController {
             ((JButton) e.getSource()).setEnabled(false);
             view.getSetDimensionsButton().setEnabled(false);
             view.getTicks().setText("0");
+            threadSleep = 1000;
         }
     }
 
