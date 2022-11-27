@@ -92,7 +92,15 @@ public class ConwayController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            int newDimensions = Integer.parseInt(view.getDimSelection().getText());
+            int newDimensions;
+            try {
+                newDimensions = Integer.parseInt(view.getDimSelection().getText());
+            } catch (NumberFormatException error) {
+                JOptionPane.showMessageDialog(null,
+                        "The dimension number you entered is invalid.", "Invalid Dimensions",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             view.getCellLayout().setRows(newDimensions);
             view.getCellLayout().setColumns(newDimensions);
