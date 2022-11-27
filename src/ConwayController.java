@@ -256,9 +256,9 @@ public class ConwayController {
                 try {
                     Thread.sleep(threadSleep);
                 } catch (InterruptedException e) {
-                    JOptionPane.showConfirmDialog(null,
+                    JOptionPane.showMessageDialog(null,
                             "Simulation complete in " + currentTicks + " ticks!",
-                            "Simulation Complete", JOptionPane.DEFAULT_OPTION);
+                            "Simulation Complete", JOptionPane.INFORMATION_MESSAGE);
                     view.getStartButton().setEnabled(true);
                     view.getSetDimensionsButton().setEnabled(true);
                     view.getStopButton().setEnabled(false);
