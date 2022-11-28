@@ -50,6 +50,7 @@ public class ConwayController {
         view.getStopButton().addActionListener(new StopButtonClick());
         view.getSpeedUpButton().addActionListener(new SpeedUpButtonClick());
         view.getSlowDownButton().addActionListener(new SlowDownButtonClick());
+        view.getPauseButton().addActionListener(new PauseButtonClick());
     }
 
     /**
@@ -175,6 +176,7 @@ public class ConwayController {
             thread.start();
             ((JButton) e.getSource()).setEnabled(false);
             view.getSetDimensionsButton().setEnabled(false);
+            view.getPauseButton().setEnabled(true);
             view.getTicks().setText("0");
             threadSleep = 1000;
         }
@@ -189,6 +191,24 @@ public class ConwayController {
         public void actionPerformed(ActionEvent e) {
             gameRunning = false;
             thread.interrupt();
+        }
+    }
+
+    private class PauseButtonClick implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton target = (JButton) e.getSource();
+            if (gameRunning) {
+                if (thread != null && !thread.isInterrupted()) {
+                    thread.interrupt();
+                    target.setText("Unpause");
+                }
+            } else {
+                thread = new Thread(new GameRun());
+                thread.start();
+                target.setText("Pause");
+            }
         }
     }
 
@@ -263,6 +283,7 @@ public class ConwayController {
                     view.getStartButton().setEnabled(true);
                     view.getSetDimensionsButton().setEnabled(true);
                     view.getStopButton().setEnabled(false);
+                    view.getPauseButton().setEnabled(false);
                     gameRunning = false;
                     return;
                 }
@@ -274,6 +295,7 @@ public class ConwayController {
                     view.getStartButton().setEnabled(true);
                     view.getSetDimensionsButton().setEnabled(true);
                     view.getStopButton().setEnabled(false);
+                    view.getPauseButton().setEnabled(false);
                     gameRunning = false;
                     thread.interrupt();
                     return;
