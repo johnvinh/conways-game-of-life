@@ -30,6 +30,10 @@ public class ConwayView extends JFrame {
      */
     private final JButton stopButton;
     /**
+     * Pauses the simulation when clicked.
+     */
+    private final JButton pauseButton;
+    /**
      * A text field which takes a number
      * determining the square dimensions
      * for the simulation.
@@ -82,6 +86,7 @@ public class ConwayView extends JFrame {
         optionsPanel = new JPanel();
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
+        pauseButton = new JButton("Pause");
         dimSelection = new JTextField(4);
         JLabel dimLabel = new JLabel("Dimensions");
         setDimensionsButton = new JButton("Set");
@@ -92,6 +97,7 @@ public class ConwayView extends JFrame {
         optionsPanel.add(ticks);
         optionsPanel.add(startButton);
         optionsPanel.add(stopButton);
+        optionsPanel.add(pauseButton);
         stopButton.setEnabled(false);
         optionsPanel.add(dimLabel);
         optionsPanel.add(dimSelection);
