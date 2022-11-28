@@ -99,6 +99,7 @@ public class ConwayView extends JFrame {
         optionsPanel.add(stopButton);
         optionsPanel.add(pauseButton);
         stopButton.setEnabled(false);
+        pauseButton.setEnabled(false);
         optionsPanel.add(dimLabel);
         optionsPanel.add(dimSelection);
         optionsPanel.add(setDimensionsButton);
