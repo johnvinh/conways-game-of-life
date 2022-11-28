@@ -216,4 +216,12 @@ public class ConwayView extends JFrame {
     public JButton getSlowDownButton() {
         return slowDownButton;
     }
+
+    /**
+     * Gets the button which pauses the simulation.
+     * @return  the pause button
+     */
+    public JButton getPauseButton() {
+        return pauseButton;
+    }
 }
