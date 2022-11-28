@@ -34,6 +34,11 @@ public class ConwayController {
      * the thread sleep time is changed by this amount.
      */
     private final int THREAD_SLEEP_INTERVAL = 300;
+    /**
+     * Indicates whether the game was interrupted from the pause button
+     * being clicked.
+     */
+    private boolean gameWasPaused = false;
 
     /**
      * Class constructor.
@@ -203,11 +208,13 @@ public class ConwayController {
                 if (thread != null && !thread.isInterrupted()) {
                     thread.interrupt();
                     target.setText("Unpause");
+                    gameWasPaused = true;
                 }
             } else {
                 thread = new Thread(new GameRun());
                 thread.start();
                 target.setText("Pause");
+                gameWasPaused = false;
             }
         }
     }
@@ -277,6 +284,11 @@ public class ConwayController {
                 try {
                     Thread.sleep(threadSleep);
                 } catch (InterruptedException e) {
+                    if (gameWasPaused) {
+                        gameRunning = false;
+                        gameWasPaused = false;
+                        return;
+                    }
                     JOptionPane.showMessageDialog(null,
                             "Simulation complete in " + currentTicks + " ticks!",
                             "Simulation Complete", JOptionPane.INFORMATION_MESSAGE);
