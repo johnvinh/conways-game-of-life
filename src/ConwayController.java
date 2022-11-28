@@ -206,15 +206,15 @@ public class ConwayController {
             JButton target = (JButton) e.getSource();
             if (gameRunning) {
                 if (thread != null && !thread.isInterrupted()) {
+                    gameWasPaused = true;
                     thread.interrupt();
                     target.setText("Unpause");
-                    gameWasPaused = true;
                 }
             } else {
+                gameWasPaused = false;
                 thread = new Thread(new GameRun());
                 thread.start();
                 target.setText("Pause");
-                gameWasPaused = false;
             }
         }
     }
